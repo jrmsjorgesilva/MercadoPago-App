@@ -11,14 +11,14 @@ const User = mongoose.model("User", {
   },
   phone: {
     area_code: Number,
-    number: Number,
+    phone_number: Number,
   },
   identification: {
     type: {
       type: String,
       required: true,
     },
-    number: {
+    identification_number: {
       type: Number,
       required: true,
     },
