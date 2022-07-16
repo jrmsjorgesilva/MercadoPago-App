@@ -1,9 +1,15 @@
-import React from 'react'
+import imgNotFound from '../../../assets/svg/page_not_found.svg';
 
 const NotFoundPage = () => {
   return (
-    <div>Error 404 - Page not found</div>
-  )
-}
+    <>
+      <h1>Parece que não encontramos o que você queria :/</h1>
+      <img
+        src={imgNotFound}
+        alt="pagina não encontrada - erro 404"
+      />
+    </>
+  );
+};
 
-export default NotFoundPage
+export default NotFoundPage;
