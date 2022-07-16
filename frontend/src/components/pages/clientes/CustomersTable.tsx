@@ -43,26 +43,24 @@ const CustomersTable = () => {
     fetchCustomersTable();
   }, []);
 
-  // dados da tabela clientes
-  function createData(
-    name: string,
-    calories: number,
-    fat: number,
-    carbs: number,
-    protein: number
-  ) {
-    return { name, calories, fat, carbs, protein };
-  }
+  type customer = {
+    first_name: string;
+    last_name: string;
+    address: {
+      id: number;
+      street_name: string;
+      street_number: number;
+      zip_code: number;
+    };
+    zip_code: number;
+    _id: number;
+  };
 
-  const rows = [
-    createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-    createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-    createData("Eclair", 262, 16.0, 24, 6.0),
-    createData("Cupcake", 305, 3.7, 67, 4.3),
-    createData("Gingerbread", 356, 16.0, 49, 3.9),
-  ];
+  const rows = customers.map((customer): customer => {
+    return customer;
+  });
 
-  console.log(customers);
+  console.log(customers, rows);
   return (
     <TableContainer component={Paper}>
       {/* <h1>
@@ -71,23 +69,31 @@ const CustomersTable = () => {
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-            <StyledTableCell align="right">Calories</StyledTableCell>
-            <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+            <StyledTableCell>Customer</StyledTableCell>
+            <StyledTableCell align="right">Id</StyledTableCell>
+            <StyledTableCell align="right">Address</StyledTableCell>
+            <StyledTableCell align="right">Number</StyledTableCell>
+            <StyledTableCell align="right">Zip Code</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <StyledTableRow key={row.name}>
+            <StyledTableRow key={row.first_name}>
               <StyledTableCell component="th" scope="row">
-                {row.name}
+                {row.first_name}
+                &nbsp;
+                {row.last_name}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
+              <StyledTableCell align="right">{row._id}</StyledTableCell>
+              <StyledTableCell align="right">
+                {row.address.street_name}
+              </StyledTableCell>
+              <StyledTableCell align="right">
+                {row.address.street_number}
+              </StyledTableCell>
+              <StyledTableCell align="right">
+                {row.address.zip_code}
+              </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
