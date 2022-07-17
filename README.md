@@ -4,6 +4,6 @@ This project was bootstrapped with [Create React App] to build a mercado pago AP
 
 ## Printscreens
 
-
+<img src="./frontend/src/assets/resources/printscreen_1.png" alt="Demo"/>
 
 ## Project still in development
