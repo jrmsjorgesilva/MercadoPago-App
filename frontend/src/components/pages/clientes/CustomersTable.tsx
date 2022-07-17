@@ -31,7 +31,7 @@ const CustomersTable = () => {
     return customer;
   });
 
-  console.log(customers, rows);
+  console.log(customers);
   return (
     <>
       <CustomerTabs />

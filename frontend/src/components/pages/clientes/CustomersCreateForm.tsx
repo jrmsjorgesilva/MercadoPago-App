@@ -11,43 +11,78 @@ import Button from "@mui/material/Button";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import customer from "../../../types/customer";
 
 // interface types
-interface IFormInputs {
-  firstName: string;
-  age: number;
-}
+// interface IFormInputs {
+//   firstName: string;
+//   age: number;
+// }
+
+// phone number RegExp
+const phoneRegExp =
+  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
 //   yup schema
 const customersSchema = yup
   .object({
-    //todo
+    first_name: yup.string().required(),
+    last_name: yup.string().required(),
+    // phone number
+    area_code: yup.number().positive().integer(),
+    phone_number: yup
+      .string()
+      .matches(phoneRegExp, "Numero de telefone inválido")
+      .min(8, "Numero muito pequeno")
+      .max(12, "Numero muito grande")
+      .required(),
+    type: yup.string(),
+    // identification
+    identification_number: yup.number(),
+    default_address: yup.string(),
+    // adress
+    id: yup.number(),
+    street_name: yup.string(),
+    street_number: yup.number(),
+    zip_code: yup.number(),
+    description: yup.string(),
+    default_card: yup.string(),
+    _id: yup.number(),
   })
   .required();
 
-const CustomersCreateForm = ({ hideShowCustormersCreateForm, openCustomersCreateForm }: any) => {
+const CustomersCreateForm = ({
+  hideShowCustormersCreateForm,
+  openCustomersCreateForm,
+}: any) => {
   // form hooks
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IFormInputs>({
+  } = useForm<customer>({
     resolver: yupResolver(customersSchema),
   });
 
-  const onSubmit = (formData: IFormInputs) => {
+  const onSubmit = (formData: customer) => {
     console.log(formData);
-  }
+
+    // close modal
+    hideShowCustormersCreateForm();
+  };
 
   return (
-    <Dialog open={openCustomersCreateForm} onClose={hideShowCustormersCreateForm}>
-      <DialogTitle>Create Customers Data</DialogTitle>
-      <DialogContent>
-        <DialogContentText>
-          To subscribe to this website, please enter your email address here. We
-          will send updates occasionally.
-        </DialogContentText>
-        <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Dialog
+        open={openCustomersCreateForm}
+        onClose={hideShowCustormersCreateForm}
+      >
+        <DialogTitle>Create Customers Data</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            To subscribe to this website, please enter your email address here.
+            We will send updates occasionally.
+          </DialogContentText>
           <TextField
             autoFocus
             margin="dense"
@@ -56,14 +91,17 @@ const CustomersCreateForm = ({ hideShowCustormersCreateForm, openCustomersCreate
             type="email"
             fullWidth
             variant="standard"
+            {...register("first_name")}
           />
-        </form>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={hideShowCustormersCreateForm}>Cancel</Button>
-        <Button onClick={hideShowCustormersCreateForm}>Subscribe</Button>
-      </DialogActions>
-    </Dialog>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={hideShowCustormersCreateForm}>Cancel</Button>
+          <Button type={"submit"} onClick={handleSubmit(onSubmit)}>
+            Subscribe
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </form>
   );
 };
 
