@@ -18,34 +18,9 @@ import imgUpdate from "../../../assets/svg/update.svg";
 import imgDelete from "../../../assets/svg/delete.svg";
 // components
 import CustomersModal from './CustomersModal';
+import CustomersTabPanel from './CustomersTabPanel';
 
-interface TabPanelProps {
-  children?: React.ReactNode;
-  dir?: string;
-  index: number;
-  value: number;
-}
-
-function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`full-width-tabpanel-${index}`}
-      aria-labelledby={`full-width-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
+// ally props for tabs
 function a11yProps(index: number) {
   return {
     id: `full-width-tab-${index}`,
@@ -100,7 +75,7 @@ const CustomersTabs = () => {
         <Tab sx={{ padding: '30px 0px' }} label="Atualizar Clientes" {...a11yProps(2)} />
         <Tab sx={{ padding: '30px 0px' }} label="Deletar Clientes" {...a11yProps(3)} />
       </Tabs>
-      <TabPanel value={value} index={0}>
+      <CustomersTabPanel value={value} index={0}>
         <Box sx={{ padding: "20px 0px", display: "flex" }}>
           <Box sx={{}}>
             <h1>Criar Clientes</h1>
@@ -130,8 +105,8 @@ const CustomersTabs = () => {
             />
           </Box>
         </Box>
-      </TabPanel>
-      <TabPanel value={value} index={1}>
+      </CustomersTabPanel>
+      <CustomersTabPanel value={value} index={1}>
         <Box sx={{ padding: "20px 0px", display: "flex" }}>
           <Box sx={{ padding: "20px 0px" }}>
             <h1>Buscar Clientes</h1>
@@ -161,8 +136,8 @@ const CustomersTabs = () => {
             />
           </Box>
         </Box>
-      </TabPanel>
-      <TabPanel value={value} index={2}>
+      </CustomersTabPanel>
+      <CustomersTabPanel value={value} index={2}>
         <Box style={{ padding: "20px 0px", display: "flex" }}>
           <Box sx={{ padding: "20px 0px" }}>
             <h1>Atualizar Clientes</h1>
@@ -192,8 +167,8 @@ const CustomersTabs = () => {
             />
           </Box>
         </Box>
-      </TabPanel>
-      <TabPanel value={value} index={3}>
+      </CustomersTabPanel>
+      <CustomersTabPanel value={value} index={3}>
         <Box sx={{ padding: "20px 0px", display: "flex" }}>
           <Box sx={{ padding: "20px 0px" }}>
             <h1>Deletar Clientes</h1>
@@ -222,7 +197,7 @@ const CustomersTabs = () => {
             />
           </Box>
         </Box>
-      </TabPanel>
+      </CustomersTabPanel>
       <CustomersModal handleModal={handleModal} openModal={openModal} />
     </Box>
   );
