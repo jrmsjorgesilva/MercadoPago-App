@@ -25,7 +25,7 @@ const customersSchema = yup
   })
   .required();
 
-const CustomersModal = ({ handleModal, openModal }: any) => {
+const CustomersCreateForm = ({ hideShowCustormersCreateForm, openCustomersCreateForm }: any) => {
   // form hooks
   const {
     register,
@@ -35,15 +35,19 @@ const CustomersModal = ({ handleModal, openModal }: any) => {
     resolver: yupResolver(customersSchema),
   });
 
+  const onSubmit = (formData: IFormInputs) => {
+    console.log(formData);
+  }
+
   return (
-    <form>
-      <Dialog open={openModal} onClose={handleModal}>
-        <DialogTitle>Subscribe</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here.
-            We will send updates occasionally.
-          </DialogContentText>
+    <Dialog open={openCustomersCreateForm} onClose={hideShowCustormersCreateForm}>
+      <DialogTitle>Create Customers Data</DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          To subscribe to this website, please enter your email address here. We
+          will send updates occasionally.
+        </DialogContentText>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <TextField
             autoFocus
             margin="dense"
@@ -53,23 +57,14 @@ const CustomersModal = ({ handleModal, openModal }: any) => {
             fullWidth
             variant="standard"
           />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
-            variant="standard"
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleModal}>Cancel</Button>
-          <Button onClick={handleModal}>Subscribe</Button>
-        </DialogActions>
-      </Dialog>
-    </form>
+        </form>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={hideShowCustormersCreateForm}>Cancel</Button>
+        <Button onClick={hideShowCustormersCreateForm}>Subscribe</Button>
+      </DialogActions>
+    </Dialog>
   );
 };
 
-export default CustomersModal;
+export default CustomersCreateForm;

@@ -17,8 +17,11 @@ import imgRead from "../../../assets/svg/search.svg";
 import imgUpdate from "../../../assets/svg/update.svg";
 import imgDelete from "../../../assets/svg/delete.svg";
 // components
-import CustomersModal from './CustomersModal';
-import CustomersTabPanel from './CustomersTabPanel';
+import CustomersCreateForm from "./CustomersCreateForm";
+import CustomersReadForm from "./CustomersReadForm";
+import CustomersUpdateForm from "./CustomersUpdateForm";
+import CustomersDeleteForm from "./CustomersDeleteForm";
+import TabPanel from "../../TabPanel";
 
 // ally props for tabs
 function a11yProps(index: number) {
@@ -31,12 +34,37 @@ function a11yProps(index: number) {
 const CustomersTabs = () => {
   // const theme = useTheme();
   // eslint-disable-next-line react-hooks/rules-of-hooks
+  // state hooks
   const [value, setValue] = useState(() => 0);
-  const [openModal, setOpenModal] = useState(() => false);
+  const [openCustomersCreateForm, setOpenCustomersCreateForm] = useState(
+    () => false
+  );
+  const [openCustomersReadForm, setOpenCustomersReadForm] = useState(
+    () => false
+  );
+  const [openCustomersUpdateForm, setOpenCustomersUpdateForm] = useState(
+    () => false
+  );
+  const [openCustomersDeleteForm, setOpenCustomersDeleteForm] = useState(
+    () => false
+  );
 
-  const handleModal = () => {
-    setOpenModal(!openModal);
-  }
+  // forms handlers
+  const hideShowCustormersCreateForm = () => {
+    setOpenCustomersCreateForm(!openCustomersCreateForm);
+  };
+
+  const hideShowCustormersReadForm = () => {
+    setOpenCustomersReadForm(!openCustomersReadForm);
+  };
+
+  const hideShowCustormersUpdateForm = () => {
+    setOpenCustomersUpdateForm(!openCustomersUpdateForm);
+  };
+
+  const hideShowCustormersDeleteForm = () => {
+    setOpenCustomersDeleteForm(!openCustomersDeleteForm);
+  };
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -70,12 +98,28 @@ const CustomersTabs = () => {
           minWidth: "200px",
         }}
       >
-        <Tab sx={{ padding: '30px 0px' }} label="Criar Clientes" {...a11yProps(0)} />
-        <Tab sx={{ padding: '30px 0px' }} label="Buscar Clientes" {...a11yProps(1)} />
-        <Tab sx={{ padding: '30px 0px' }} label="Atualizar Clientes" {...a11yProps(2)} />
-        <Tab sx={{ padding: '30px 0px' }} label="Deletar Clientes" {...a11yProps(3)} />
+        <Tab
+          sx={{ padding: "30px 0px" }}
+          label="Criar Clientes"
+          {...a11yProps(0)}
+        />
+        <Tab
+          sx={{ padding: "30px 0px" }}
+          label="Buscar Clientes"
+          {...a11yProps(1)}
+        />
+        <Tab
+          sx={{ padding: "30px 0px" }}
+          label="Atualizar Clientes"
+          {...a11yProps(2)}
+        />
+        <Tab
+          sx={{ padding: "30px 0px" }}
+          label="Deletar Clientes"
+          {...a11yProps(3)}
+        />
       </Tabs>
-      <CustomersTabPanel value={value} index={0}>
+      <TabPanel value={value} index={0}>
         <Box sx={{ padding: "20px 0px", display: "flex" }}>
           <Box sx={{}}>
             <h1>Criar Clientes</h1>
@@ -88,7 +132,7 @@ const CustomersTabs = () => {
             <Button
               style={{ width: "100%" }}
               variant="outlined"
-              onClick={() => handleModal()}
+              onClick={() => hideShowCustormersCreateForm()}
               className="createBtn"
               endIcon={<AddCircleOutlineIcon />}
             >
@@ -105,8 +149,8 @@ const CustomersTabs = () => {
             />
           </Box>
         </Box>
-      </CustomersTabPanel>
-      <CustomersTabPanel value={value} index={1}>
+      </TabPanel>
+      <TabPanel value={value} index={1}>
         <Box sx={{ padding: "20px 0px", display: "flex" }}>
           <Box sx={{ padding: "20px 0px" }}>
             <h1>Buscar Clientes</h1>
@@ -119,7 +163,7 @@ const CustomersTabs = () => {
             <Button
               style={{ width: "100%" }}
               variant="outlined"
-              onClick={() => handleModal()}
+              onClick={() => hideShowCustormersReadForm()}
               className="createBtn"
               endIcon={<ScreenSearchDesktopIcon />}
             >
@@ -136,8 +180,8 @@ const CustomersTabs = () => {
             />
           </Box>
         </Box>
-      </CustomersTabPanel>
-      <CustomersTabPanel value={value} index={2}>
+      </TabPanel>
+      <TabPanel value={value} index={2}>
         <Box style={{ padding: "20px 0px", display: "flex" }}>
           <Box sx={{ padding: "20px 0px" }}>
             <h1>Atualizar Clientes</h1>
@@ -150,7 +194,7 @@ const CustomersTabs = () => {
             <Button
               style={{ width: "100%" }}
               variant="outlined"
-              onClick={() => handleModal()}
+              onClick={() => hideShowCustormersUpdateForm()}
               className="createBtn"
               endIcon={<BrowserUpdatedIcon />}
             >
@@ -167,8 +211,8 @@ const CustomersTabs = () => {
             />
           </Box>
         </Box>
-      </CustomersTabPanel>
-      <CustomersTabPanel value={value} index={3}>
+      </TabPanel>
+      <TabPanel value={value} index={3}>
         <Box sx={{ padding: "20px 0px", display: "flex" }}>
           <Box sx={{ padding: "20px 0px" }}>
             <h1>Deletar Clientes</h1>
@@ -180,7 +224,7 @@ const CustomersTabs = () => {
             <Button
               style={{ width: "100%" }}
               variant="outlined"
-              onClick={() => handleModal()}
+              onClick={() => hideShowCustormersDeleteForm()}
               className="createBtn"
               endIcon={<DeleteOutlineIcon />}
             >
@@ -197,8 +241,23 @@ const CustomersTabs = () => {
             />
           </Box>
         </Box>
-      </CustomersTabPanel>
-      <CustomersModal handleModal={handleModal} openModal={openModal} />
+      </TabPanel>
+      <CustomersCreateForm
+        hideShowCustormersCreateForm={hideShowCustormersCreateForm}
+        openCustomersCreateForm={openCustomersCreateForm}
+      />
+      <CustomersReadForm
+        hideShowCustormersReadForm={hideShowCustormersReadForm}
+        openCustomersReadForm={openCustomersReadForm}
+      />
+      <CustomersUpdateForm
+        hideShowCustormersUpdateForm={hideShowCustormersUpdateForm}
+        openCustomersUpdateForm={openCustomersUpdateForm}
+      />
+      <CustomersDeleteForm
+        hideShowCustormersDeleteForm={hideShowCustormersDeleteForm}
+        openCustomersDeleteForm={openCustomersDeleteForm}
+      />
     </Box>
   );
 };

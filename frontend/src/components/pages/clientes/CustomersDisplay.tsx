@@ -1,32 +1,12 @@
 // material ui
-import { styled } from "@mui/material/styles";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
 // types
-// import customer from "../../../types/customer";
+import { StyledTableCell, StyledTableRow } from "../../StyledTables";
+import EmptyList from "../404/EmptyList";
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
-}));
 
 const CustomersDisplay = ({ rows }: any) => {
   return (
@@ -41,7 +21,7 @@ const CustomersDisplay = ({ rows }: any) => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {rows.map((row: any) => (
+        {rows ? rows.map((row: any) => (
           <StyledTableRow key={row.first_name}>
             <StyledTableCell component="th" scope="row">
               {row.first_name}
@@ -59,7 +39,7 @@ const CustomersDisplay = ({ rows }: any) => {
               {row.address.zip_code}
             </StyledTableCell>
           </StyledTableRow>
-        ))}
+        )) : <EmptyList message={'Não há clientes'} severity={'warning'} />}
       </TableBody>
     </Table>
   );

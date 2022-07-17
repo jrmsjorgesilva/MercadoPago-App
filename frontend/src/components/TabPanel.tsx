@@ -8,7 +8,7 @@ interface TabPanelProps {
   value: number;
 }
 
-const CustomersTabPanel = (props: TabPanelProps) => {
+const TabPanel = (props: TabPanelProps) => {
   const { children, value, index, ...other } = props;
 
   return (
@@ -28,4 +28,4 @@ const CustomersTabPanel = (props: TabPanelProps) => {
   );
 };
 
-export default CustomersTabPanel;
+export default TabPanel;
