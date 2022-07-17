@@ -12,7 +12,8 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import Link from '@mui/material/Link'
 
 const Nav = () => {
   const pages = ["Clientes", "Pedidos", "Pagamentos", "Preferências"];
@@ -97,7 +98,7 @@ const Nav = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Link to={`/${page}`}>
+                  <Link color='inherit' href={`/${page}`}>
                     <Typography textAlign="center">{page}</Typography>
                   </Link>
                 </MenuItem>
@@ -130,7 +131,7 @@ const Nav = () => {
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                <Link to={`/${page}`}>{page}</Link>
+                <Link color='inherit' href={`/${page}`}>{page}</Link>
               </Button>
             ))}
           </Box>
@@ -160,7 +161,7 @@ const Nav = () => {
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">
-                    <Link to={`/${setting}`}>{setting}</Link>
+                    <Link color='inherit' href={`/${setting}`}>{setting}</Link>
                   </Typography>
                 </MenuItem>
               ))}

@@ -6,6 +6,9 @@ import Paper from "@mui/material/Paper";
 import CustomersDisplay from "./CustomersDisplay";
 // types
 import customer from "../../../types/customer";
+// components
+import CustomerTabs from "./CustomersTabs";
+import CustomersFilter from './CustomersFilter';
 
 const CustomersTable = () => {
   // customers state
@@ -30,9 +33,16 @@ const CustomersTable = () => {
 
   console.log(customers, rows);
   return (
-    <TableContainer style={{ width: '90%', margin: '20px auto' }} component={Paper}>
+    <>
+      <CustomerTabs />
+      <CustomersFilter />
+      <TableContainer
+        style={{ width: "90%", margin: "20px auto" }}
+        component={Paper}
+      >
         <CustomersDisplay rows={rows} />
-    </TableContainer>
+      </TableContainer>
+    </>
   );
 };
 
