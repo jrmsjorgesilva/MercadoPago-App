@@ -2,13 +2,14 @@
 import React, { useState, useEffect } from "react";
 // material ui
 import TableContainer from "@mui/material/TableContainer";
+import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import CustomersDisplay from "./CustomersDisplay";
 // types
 import customer from "../../../types/customer";
 // components
 import CustomerTabs from "./CustomersTabs";
-import CustomersFilter from './CustomersFilter';
+import CustomersFilter from "./CustomersFilter";
 
 const CustomersTable = () => {
   // customers state
@@ -34,6 +35,18 @@ const CustomersTable = () => {
   console.log(customers);
   return (
     <>
+      <Typography
+        sx={{
+          textAlign: "center",
+          p: 2,
+          my: 4,
+          fontSize: "30px",
+          fontWeight: "900",
+          color: "#747dff",
+        }}
+      >
+        <span style={{ color: '#333' }}>API de Clientes</span> Mercado Pago
+      </Typography>
       <CustomerTabs />
       <CustomersFilter />
       <TableContainer
