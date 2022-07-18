@@ -7,21 +7,27 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import FormGroup from "@mui/material/FormGroup";
 // libs
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+// components
+import CustomAlert from "../404/EmptyList";
 
 // interface types
-interface IFormInputs {
-  firstName: string;
-  age: number;
+interface DeleteInputs {
+  id: string;
+  checkDelete: boolean;
 }
 
 //   yup schema
 const customersSchema = yup
   .object({
-    //todo
+    id: yup.string().required(),
+    checkDelete: yup.boolean().oneOf([true]).required(),
   })
   .required();
 
@@ -29,16 +35,20 @@ const CustomersDeleteForm = ({
   hideShowCustormersDeleteForm,
   openCustomersDeleteForm,
 }: any) => {
+
+  // states
+  const [checked, setChecked] = useState(() => false);
+
   // form hooks
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IFormInputs>({
+  } = useForm<DeleteInputs>({
     resolver: yupResolver(customersSchema),
   });
 
-  const onSubmit = (formData: IFormInputs) => {
+  const onSubmit = (formData: DeleteInputs) => {
     console.log(formData);
   };
 
@@ -47,27 +57,56 @@ const CustomersDeleteForm = ({
       open={openCustomersDeleteForm}
       onClose={hideShowCustormersDeleteForm}
     >
-      <DialogTitle>Delete Customers Data</DialogTitle>
+      <DialogTitle>Deletar Cliente</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          To subscribe to this website, please enter your email address here. We
-          will send Deletes occasionally.
+          Insira a id do cliente a ser deletado da base de dados local
         </DialogContentText>
         <form onSubmit={handleSubmit(onSubmit)}>
           <TextField
             autoFocus
             margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
+            id="idCliente"
+            label="ID do cliente"
+            type="text"
             fullWidth
             variant="standard"
+            {...register("id", { required: true })}
           />
+          {errors.id && (
+            <CustomAlert severity="error">
+              É preciso preencher o id do cliente
+            </CustomAlert>
+          )}
+          <FormGroup>
+            <FormControlLabel
+              control={<Checkbox checked={checked} onChange={() => setChecked(!checked)} /> }
+              label="Confirmo que vou excluir permanentemente o cliente do banco de dados"
+              {...register("checkDelete", { required: true })}
+            />
+            {errors.checkDelete && (
+              <CustomAlert severity="error">
+                É preciso confirmar o termo de responsabilidade de exclusão
+              </CustomAlert>
+            )}
+          </FormGroup>
         </form>
       </DialogContent>
       <DialogActions>
-        <Button onClick={hideShowCustormersDeleteForm}>Cancel</Button>
-        <Button onClick={hideShowCustormersDeleteForm}>Subscribe</Button>
+        <Button
+          variant="outlined"
+          color="error"
+          onClick={hideShowCustormersDeleteForm}
+        >
+          Cancelar
+        </Button>
+        <Button
+          variant="contained"
+          type={"submit"}
+          onClick={handleSubmit(onSubmit)}
+        >
+          Enviar
+        </Button>
       </DialogActions>
     </Dialog>
   );
