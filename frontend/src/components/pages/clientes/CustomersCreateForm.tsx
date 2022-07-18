@@ -19,7 +19,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import customer from "../../../types/customer";
 // components
-import CustomAlert from "../404/EmptyList";
+import CustomAlert from "../404/CustomAlert";
 // utils
 
 // phone number RegExp

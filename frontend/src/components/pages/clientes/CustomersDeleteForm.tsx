@@ -15,7 +15,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 // components
-import CustomAlert from "../404/EmptyList";
+import CustomAlert from "../404/CustomAlert";
 
 // interface types
 interface DeleteInputs {

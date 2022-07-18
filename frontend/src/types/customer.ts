@@ -18,7 +18,7 @@ type customer = {
   };
   description?: string;
   default_card?: string;
-  _id?: number;
+  id?: number;
 };
 
 export default customer;

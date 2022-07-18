@@ -14,23 +14,18 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 // types
-import customer from '../../../types/customer';
-// components 
-import CustomAlert from '../404/EmptyList';
+import customer from "../../../types/customer";
+// components
+import CustomAlert from "../404/CustomAlert";
 
 // phone number RegExp
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
-
-// interface types
-interface idUpdateInputs {
-  id: string;
-}
-
-//   yup schema
+//   yup schemas
 const customersSchema = yup
   .object({
+    id: yup.string().required(),
     first_name: yup.string().required(),
     last_name: yup.string().required(),
     // phone number
@@ -65,7 +60,7 @@ const CustomersUpdateForm = ({
   hideShowCustormersUpdateForm,
   openCustomersUpdateForm,
 }: any) => {
-// states
+  // states
   const [identificationType, setIdentificationType] = useState(() => "");
 
   // form hooks
@@ -79,8 +74,8 @@ const CustomersUpdateForm = ({
 
   // handlers
   const onSelectType = (e: SelectChangeEvent) => {
-    setIdentificationType(e.target.value)
-  }
+    setIdentificationType(e.target.value);
+  };
 
   const onSubmit = (formData: customer) => {
     console.log(formData);
@@ -94,10 +89,26 @@ const CustomersUpdateForm = ({
       <DialogTitle>Atualizar Cliente</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          Insira o ID e as informações que deseja atualizar (deixe em branco o que quiser manter)
+          Insira o ID e as informações que deseja atualizar (deixe em branco o
+          que quiser manter)
         </DialogContentText>
         <form onSubmit={handleSubmit(onSubmit)}>
         <TextField
+            autoFocus
+            margin="dense"
+            id="idUpdate"
+            label="Numero do ID:"
+            type="text"
+            fullWidth
+            variant="filled"
+            {...register("id", { required: true })}
+          />
+          {errors.id && (
+            <CustomAlert severity="error">
+              É preciso identificar o cliente pelo numero de ID
+            </CustomAlert>
+          )}
+          <TextField
             autoFocus
             margin="dense"
             id="first_name"
@@ -108,7 +119,9 @@ const CustomersUpdateForm = ({
             {...register("first_name", { required: true })}
           />
           {errors.first_name && (
-            <CustomAlert severity="error">É preciso preencher o nome</CustomAlert>
+            <CustomAlert severity="error">
+              É preciso preencher o nome
+            </CustomAlert>
           )}
           <TextField
             margin="dense"
@@ -120,7 +133,9 @@ const CustomersUpdateForm = ({
             {...register("last_name", { required: true })}
           />
           {errors.last_name && (
-            <CustomAlert severity="error">É preciso preencher o nome</CustomAlert>
+            <CustomAlert severity="error">
+              É preciso preencher o nome
+            </CustomAlert>
           )}
           <TextField
             style={{ width: "20%" }}
@@ -201,7 +216,7 @@ const CustomersUpdateForm = ({
         </form>
       </DialogContent>
       <DialogActions>
-      <Button
+        <Button
           variant="outlined"
           color="error"
           onClick={hideShowCustormersUpdateForm}

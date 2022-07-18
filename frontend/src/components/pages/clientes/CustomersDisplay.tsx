@@ -5,7 +5,7 @@ import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
 // types
 import { StyledTableCell, StyledTableRow } from "../../StyledTables";
-import EmptyList from "../404/EmptyList";
+import CustomAlert from "../404/CustomAlert";
 
 
 const CustomersDisplay = ({ rows }: any) => {
@@ -39,7 +39,7 @@ const CustomersDisplay = ({ rows }: any) => {
               {row.address.zip_code}
             </StyledTableCell>
           </StyledTableRow>
-        )) : <EmptyList message={'Não há clientes'} severity={'warning'} />}
+        )) : <CustomAlert message={'Não há clientes'} severity={'warning'} />}
       </TableBody>
     </Table>
   );
