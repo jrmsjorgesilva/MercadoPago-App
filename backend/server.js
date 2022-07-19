@@ -5,6 +5,7 @@ const mongooseConnect = require("./database/mongo");
 const PORT = process.env.PORT || 8000;
 // routes
 const userRoutes = require("./routes/userRoutes");
+const customerRoute = require('./routes/customerRoute')
 const notFoundRoute = require("./routes/notFoundRoute");
 
 // express
@@ -15,8 +16,10 @@ server.use(cors());
 server.use(express.json());
 
 // routes
-// API de clientes da documentação mercado pago
+// Rotas para usuarios autenticados da documentação mercado pago
 server.use("/users", userRoutes);
+// API de clientes da documentação mercado pago
+server.use("/customers", customerRoute);
 // API de criação de pedido da documentação mercado pago
 server.use("/orders", userRoutes);
 // API de pagamentos da documentação mercado pago
