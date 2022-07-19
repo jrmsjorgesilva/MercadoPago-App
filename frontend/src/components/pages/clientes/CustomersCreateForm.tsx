@@ -44,11 +44,11 @@ const CustomersCreateForm = ({
     setIdentificationType(e.target.value);
   };
 
-  const onSubmit = (formData: customer) => {
+  const onSubmit = async (formData: customer) => {
     console.log(formData);
 
 
-      const URL_ENDPOINT = `http://localhost:8000/users`;
+      const URL_ENDPOINT = `/costumers`;
 
       axios.post(URL_ENDPOINT, {
         formData,
@@ -57,6 +57,18 @@ const CustomersCreateForm = ({
       }).catch((error) => {
         console.log(error);
       })
+
+      // console.log(formData)
+
+      // const URL_ENDPOINT = `https://jsonplaceholder.typicode.com/todos`;
+
+
+      // axios.get(URL_ENDPOINT).then((response) => {
+      //   console.log(response);
+      //   return response;
+      // }).catch((err) => {
+      //   console.error(err);
+      // })
 
       console.log(formData)
 

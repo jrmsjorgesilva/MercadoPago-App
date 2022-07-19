@@ -5,7 +5,8 @@ const mongooseConnect = require("./database/mongo");
 const PORT = process.env.PORT || 8000;
 // routes
 const userRoutes = require("./routes/userRoutes");
-const customerRoute = require('./routes/customerRoute')
+const customerRoute = require("./routes/customerRoute");
+const mercadopagoRoute = require('./routes/mercadopagoRoute');
 const notFoundRoute = require("./routes/notFoundRoute");
 
 // express
@@ -26,6 +27,8 @@ server.use("/orders", userRoutes);
 server.use("/payments", userRoutes);
 // API de preferencias da documentação mercado pago
 server.use("/preferences", userRoutes);
+// Mercado pago
+server.use("/mercadopago", mercadopagoRoute);
 server.use("*", notFoundRoute);
 
 // database connect
