@@ -12,49 +12,11 @@ import MenuItem from "@mui/material/MenuItem";
 // libs
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 // types
 import customer from "../../../types/customer";
 // components
 import CustomAlert from "../404/CustomAlert";
-
-// phone number RegExp
-const phoneRegExp =
-  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
-
-//   yup schemas
-const customersSchema = yup
-  .object({
-    id: yup.string().required(),
-    first_name: yup.string().required(),
-    last_name: yup.string().required(),
-    // phone number
-    phone: yup.object().shape({
-      area_code: yup.number().positive().integer(),
-      phone_number: yup
-        .string()
-        .matches(phoneRegExp, "Numero de telefone inválido")
-        .min(8, "Numero muito pequeno")
-        .max(12, "Numero muito grande")
-        .required(),
-    }),
-    // identification
-    identification: yup.object().shape({
-      type: yup.string(),
-      identification_number: yup.number(),
-    }),
-    default_address: yup.string(),
-    // adress
-    adress: yup.object().shape({
-      id: yup.number(),
-      street_name: yup.string(),
-      street_number: yup.number(),
-      zip_code: yup.number(),
-    }),
-    description: yup.string(),
-    default_card: yup.string(),
-  })
-  .required();
+import updateCustomersSchema from "../../validations/updateCustomersSchema";
 
 const CustomersUpdateForm = ({
   hideShowCustormersUpdateForm,
@@ -69,7 +31,7 @@ const CustomersUpdateForm = ({
     handleSubmit,
     formState: { errors },
   } = useForm<customer>({
-    resolver: yupResolver(customersSchema),
+    resolver: yupResolver(updateCustomersSchema),
   });
 
   // handlers
@@ -79,6 +41,9 @@ const CustomersUpdateForm = ({
 
   const onSubmit = (formData: customer) => {
     console.log(formData);
+
+    // close modal
+    hideShowCustormersUpdateForm();
   };
 
   return (
@@ -93,7 +58,7 @@ const CustomersUpdateForm = ({
           que quiser manter)
         </DialogContentText>
         <form onSubmit={handleSubmit(onSubmit)}>
-        <TextField
+          <TextField
             autoFocus
             margin="dense"
             id="idUpdate"

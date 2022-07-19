@@ -13,7 +13,7 @@ import FormGroup from "@mui/material/FormGroup";
 // libs
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import deleteCustomersSchema from "../../validations/deleteCustomersSchema";
 // components
 import CustomAlert from "../404/CustomAlert";
 
@@ -23,19 +23,10 @@ interface DeleteInputs {
   checkDelete: boolean;
 }
 
-//   yup schema
-const customersSchema = yup
-  .object({
-    id: yup.string().required(),
-    checkDelete: yup.boolean().oneOf([true]).required(),
-  })
-  .required();
-
 const CustomersDeleteForm = ({
   hideShowCustormersDeleteForm,
   openCustomersDeleteForm,
 }: any) => {
-
   // states
   const [checked, setChecked] = useState(() => false);
 
@@ -45,11 +36,14 @@ const CustomersDeleteForm = ({
     handleSubmit,
     formState: { errors },
   } = useForm<DeleteInputs>({
-    resolver: yupResolver(customersSchema),
+    resolver: yupResolver(deleteCustomersSchema),
   });
 
   const onSubmit = (formData: DeleteInputs) => {
     console.log(formData);
+
+    // close modal
+    hideShowCustormersDeleteForm();
   };
 
   return (
@@ -80,7 +74,12 @@ const CustomersDeleteForm = ({
           )}
           <FormGroup>
             <FormControlLabel
-              control={<Checkbox checked={checked} onChange={() => setChecked(!checked)} /> }
+              control={
+                <Checkbox
+                  checked={checked}
+                  onChange={() => setChecked(!checked)}
+                />
+              }
               label="Confirmo que vou excluir permanentemente o cliente do banco de dados"
               {...register("checkDelete", { required: true })}
             />

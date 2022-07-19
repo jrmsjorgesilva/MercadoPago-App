@@ -21,7 +21,7 @@ const CustomersDisplay = ({ rows }: any) => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {rows ? rows.map((row: any) => (
+        {rows.length > 0 ? rows.map((row: any) => (
           <StyledTableRow key={row.first_name}>
             <StyledTableCell component="th" scope="row">
               {row.first_name}

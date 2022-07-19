@@ -10,21 +10,13 @@ import Button from "@mui/material/Button";
 // libs
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import CustomAlert from "../404/CustomAlert";
+import readCustomersSchema from '../../validations/readCustomersSchema'
 
 // interface types
 interface idReadInput {
   id: string;
 }
-
-//   yup schema
-const customersSchema = yup
-  .object({
-    //todo
-    id: yup.string().min(10).required(),
-  })
-  .required();
 
 const CustomersReadForm = ({
   hideShowCustormersReadForm,
@@ -36,11 +28,14 @@ const CustomersReadForm = ({
     handleSubmit,
     formState: { errors },
   } = useForm<idReadInput>({
-    resolver: yupResolver(customersSchema),
+    resolver: yupResolver(readCustomersSchema),
   });
 
   const onSubmit = (formData: idReadInput) => {
     console.log(formData);
+
+    // close modal
+    hideShowCustormersReadForm();
   };
 
   return (
@@ -61,7 +56,11 @@ const CustomersReadForm = ({
             variant="standard"
             {...register("id", { required: true })}
           />
-          {errors.id && <CustomAlert severity='error'>É preciso preencher o ID do cliente</CustomAlert>}
+          {errors.id && (
+            <CustomAlert severity="error">
+              É preciso preencher o ID do cliente
+            </CustomAlert>
+          )}
         </form>
       </DialogContent>
       <DialogActions>
