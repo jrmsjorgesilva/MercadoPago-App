@@ -42,8 +42,8 @@ const updateOrder = async (req, res) => {
   };
 
   try {
-    const updatedOrder = await Order.updateOne({ _id: orderId }, orderToUpdate);
-    return res.status(200).json(updatedOrder);
+    await Order.updateOne({ _id: orderId }, orderToUpdate);
+    return res.status(200).json(orderToUpdate);
   } catch (error) {
     return res.status(422).json({
       message: `Não foi possível atualizar os dados no banco de dados para o pedido ${orderId}`,
