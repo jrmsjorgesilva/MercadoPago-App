@@ -17,6 +17,7 @@ import customer from "../../../types/customer";
 // components
 import CustomAlert from "../404/CustomAlert";
 import updateCustomersSchema from "../../validations/updateCustomersSchema";
+import axios from "axios";
 
 const CustomersUpdateForm = ({
   hideShowCustormersUpdateForm,
@@ -39,8 +40,21 @@ const CustomersUpdateForm = ({
     setIdentificationType(e.target.value);
   };
 
+  const patchCustomerById = async (formData: customer) => {
+    try {
+      const URL = `http://localhost:8000/customers/${formData.id}`;
+      const response = await axios.patch(URL, formData);
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const onSubmit = (formData: customer) => {
     console.log(formData);
+
+    // fetch
+    patchCustomerById(formData);
 
     // close modal
     hideShowCustormersUpdateForm();

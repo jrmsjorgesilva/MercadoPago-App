@@ -44,23 +44,8 @@ const CustomersCreateForm = ({
     setIdentificationType(e.target.value);
   };
 
-  const onSubmit = async (formData: customer) => {
-    console.log(formData);
-
-    // const URL_ENDPOINT = `http://localhost:8000/customers`;
-
-    // fetch(URL_ENDPOINT, {
-    //   method: "POST",
-    //   body: JSON.stringify(formData),
-    //   headers: { "Content-Type": "application/json" },
-    // })
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-
+  const postCustomers = async (formData: customer) => {
+    // fetch
     try {
       const URL_ENDPOINT = `http://localhost:8000/customers`;
       const response = await axios.post(URL_ENDPOINT, formData);
@@ -68,19 +53,11 @@ const CustomersCreateForm = ({
     } catch (error) {
       console.error();
     }
+  };
 
-    // console.log(formData)
-
-    // const URL_ENDPOINT = `https://jsonplaceholder.typicode.com/todos`;
-
-    // axios.get(URL_ENDPOINT).then((response) => {
-    //   console.log(response);
-    //   return response;
-    // }).catch((err) => {
-    //   console.error(err);
-    // })
-
-    console.log(formData);
+  const onSubmit = async (formData: customer) => {
+    // fetch
+    postCustomers(formData);
 
     // close modal
     hideShowCustormersCreateForm();

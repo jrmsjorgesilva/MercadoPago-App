@@ -14,6 +14,7 @@ import FormGroup from "@mui/material/FormGroup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import deleteCustomersSchema from "../../validations/deleteCustomersSchema";
+import axios from 'axios';
 // components
 import CustomAlert from "../404/CustomAlert";
 
@@ -39,8 +40,21 @@ const CustomersDeleteForm = ({
     resolver: yupResolver(deleteCustomersSchema),
   });
 
+  const deleteCustomer = async (formData: DeleteInputs) => {
+    try {
+      const URL = `http://localhost:8000/customers/${formData.id}`;
+      const response = await axios.delete(URL);
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   const onSubmit = (formData: DeleteInputs) => {
     console.log(formData);
+
+    // fetch 
+    deleteCustomer(formData);
 
     // close modal
     hideShowCustormersDeleteForm();

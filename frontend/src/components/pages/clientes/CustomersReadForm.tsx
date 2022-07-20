@@ -11,7 +11,8 @@ import Button from "@mui/material/Button";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CustomAlert from "../404/CustomAlert";
-import readCustomersSchema from '../../validations/readCustomersSchema'
+import readCustomersSchema from "../../validations/readCustomersSchema";
+import axios from "axios";
 
 // interface types
 interface idReadInput {
@@ -31,8 +32,21 @@ const CustomersReadForm = ({
     resolver: yupResolver(readCustomersSchema),
   });
 
+  const getCustomersById = async (formData: idReadInput) => {
+    try {
+      const URL = `http://localhost:8000/customers/${formData.id}`;
+      const response = await axios.get(URL);
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const onSubmit = (formData: idReadInput) => {
-    console.log(formData);
+    console.log(formData.id);
+
+    // fetch
+    getCustomersById(formData);
 
     // close modal
     hideShowCustormersReadForm();
