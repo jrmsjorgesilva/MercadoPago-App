@@ -3,6 +3,7 @@ const axios = require("axios");
 const cors = require("cors");
 const mongooseConnect = require("./database/mongo");
 const PORT = process.env.PORT || 8000;
+const bodyParser = require('body-parser');
 // routes
 const userRoutes = require("./routes/userRoutes");
 const customerRoute = require("./routes/customerRoute");
@@ -13,6 +14,7 @@ const notFoundRoute = require("./routes/notFoundRoute");
 const server = express();
 
 // server utils
+server.use(bodyParser.urlencoded({ extended: false }));
 server.use(cors());
 server.use(express.json());
 

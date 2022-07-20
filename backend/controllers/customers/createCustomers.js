@@ -1,6 +1,8 @@
 const Customer = require("../../models/customerSchema");
 
 async function createCustomer(req, res) {
+  console.log("elaiê");
+
   const {
     first_name,
     last_name,

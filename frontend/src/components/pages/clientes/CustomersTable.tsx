@@ -18,7 +18,7 @@ const CustomersTable = () => {
   // fetch customers
   useEffect(() => {
     const fetchCustomersTable = async () => {
-      const URL = `/costumers`;
+      const URL = `http://localhost:8000/customers`;
       const response = await fetch(URL);
       const data = await response.json();
       console.log("capiroto", data);

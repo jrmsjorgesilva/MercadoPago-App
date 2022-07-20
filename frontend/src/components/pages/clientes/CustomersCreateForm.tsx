@@ -47,30 +47,40 @@ const CustomersCreateForm = ({
   const onSubmit = async (formData: customer) => {
     console.log(formData);
 
+    // const URL_ENDPOINT = `http://localhost:8000/customers`;
 
-      const URL_ENDPOINT = `/costumers`;
+    // fetch(URL_ENDPOINT, {
+    //   method: "POST",
+    //   body: JSON.stringify(formData),
+    //   headers: { "Content-Type": "application/json" },
+    // })
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
 
-      axios.post(URL_ENDPOINT, {
-        formData,
-      }).then((response) => {
-        console.log(response);
-      }).catch((error) => {
-        console.log(error);
-      })
+    try {
+      const URL_ENDPOINT = `http://localhost:8000/customers`;
+      const response = await axios.post(URL_ENDPOINT, formData);
+      console.log(response);
+    } catch (error) {
+      console.error();
+    }
 
-      // console.log(formData)
+    // console.log(formData)
 
-      // const URL_ENDPOINT = `https://jsonplaceholder.typicode.com/todos`;
+    // const URL_ENDPOINT = `https://jsonplaceholder.typicode.com/todos`;
 
+    // axios.get(URL_ENDPOINT).then((response) => {
+    //   console.log(response);
+    //   return response;
+    // }).catch((err) => {
+    //   console.error(err);
+    // })
 
-      // axios.get(URL_ENDPOINT).then((response) => {
-      //   console.log(response);
-      //   return response;
-      // }).catch((err) => {
-      //   console.error(err);
-      // })
-
-      console.log(formData)
+    console.log(formData);
 
     // close modal
     hideShowCustormersCreateForm();

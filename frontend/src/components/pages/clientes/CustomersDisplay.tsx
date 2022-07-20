@@ -30,13 +30,13 @@ const CustomersDisplay = ({ rows }: any) => {
             </StyledTableCell>
             <StyledTableCell align="right">{row._id}</StyledTableCell>
             <StyledTableCell align="right">
-              {row.address.street_name}
+              {row.address?.street_name}
             </StyledTableCell>
             <StyledTableCell align="right">
-              {row.address.street_number}
+              {row.address?.street_number}
             </StyledTableCell>
             <StyledTableCell align="right">
-              {row.address.zip_code}
+              {row.address?.zip_code}
             </StyledTableCell>
           </StyledTableRow>
         )) : <CustomAlert message={'Não há clientes'} severity={'warning'} />}
