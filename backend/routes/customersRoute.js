@@ -2,14 +2,14 @@ const router = require("express").Router();
 // models
 const Customer = require("../models/customerSchema");
 // controllers
-const createCustomers = require("../controllers/customers/createCustomers");
+const createCustomer = require("../controllers/customers/createCustomer");
 const getCustomers = require("../controllers/customers/getCustomers");
 const getCustomerById = require("../controllers/customers/getCustomerById");
 const deleteCustomer = require("../controllers/customers/deleteCustomer");
 const updateCustomer = require("../controllers/customers/updateCustomer");
 
 // POST
-router.post("/", createCustomers);
+router.post("/", createCustomer);
 
 // GET
 router.get("/", getCustomers);

@@ -1,0 +1,170 @@
+[Function (anonymous)] {
+  configure: [Function: configure],
+  utils: {
+    ONLY_DATE_PATTERN: /[0-9]{4}-[0-9]{2}-[0-9]{2}$/,
+    DATE_TIME_PATTERN: /[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}$/,
+    ISO_8601_PATTERN: /[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}[-|+][0-9]{2}:[0-9]{2}$/,
+    date: { now: [Function (anonymous)], from: [Function (anonymous)] }
+  },
+  configurations: {
+    sandbox: false,
+    show_promise_error: true,
+    cache_max_size: 104857600,
+    configure: [Function (anonymous)],
+    getClientId: [Function (anonymous)],
+    getClientSecret: [Function (anonymous)],
+    getPlatformId: [Function (anonymous)],
+    getCorporationId: [Function (anonymous)],
+    getIntegratorId: [Function (anonymous)],
+    setAccessToken: [Function (anonymous)],
+    getAccessToken: [Function (anonymous)],
+    setRefreshToken: [Function (anonymous)],
+    getRefreshToken: [Function (anonymous)],
+    getBaseUrl: [Function (anonymous)],
+    getProductId: [Function (anonymous)],
+    getTrackingId: [Function (anonymous)],
+    getUserAgent: [Function (anonymous)],
+    areTestsRunnning: [Function (anonymous)]
+  },
+  payment: {
+    schema: { additionalProperties: true, properties: [Object] },
+    idempotency: true,
+    partnersHeaders: true,
+    create: [Function (anonymous)],
+    save: [Function (anonymous)],
+    update: [Function (anonymous)],
+    get: [Function (anonymous)],
+    findById: [Function (anonymous)],
+    search: [Function (anonymous)],
+    oldSearch: [Function (anonymous)],
+    cancel: [Function (anonymous)],
+    capture: [Function (anonymous)],
+    capturePartial: [Function (anonymous)],
+    refund: [Function (anonymous)],
+    refundPartial: [Function (anonymous)]
+  },
+  payment_methods: { listAll: [Function (anonymous)] },
+  preferences: {
+    schema: { additionalProperties: true, properties: [Object] },
+    partnersHeaders: true,
+    create: [Function (anonymous)],
+    save: [Function (anonymous)],
+    update: [Function (anonymous)],
+    get: [Function (anonymous)],
+    findById: [Function (anonymous)]
+  },
+  preapproval: {
+    schema: { additionalProperties: true, properties: [Object] },
+    create: [Function (anonymous)],
+    save: [Function (anonymous)],
+    update: [Function (anonymous)],
+    get: [Function (anonymous)],
+    findById: [Function (anonymous)],
+    search: [Function (anonymous)],
+    cancel: [Function (anonymous)],
+    pause: [Function (anonymous)]
+  },
+  merchant_orders: {
+    schema: { additionalProperties: true, properties: [Object] },
+    create: [Function (anonymous)],
+    save: [Function (anonymous)],
+    update: [Function (anonymous)],
+    get: [Function (anonymous)],
+    findById: [Function (anonymous)]
+  },
+  customers: {
+    schema: { additionalProperties: true, properties: [Object] },
+    cards: {
+      all: [Function (anonymous)],
+      create: [Function (anonymous)],
+      save: [Function (anonymous)],
+      update: [Function (anonymous)],
+      get: [Function (anonymous)],
+      findById: [Function (anonymous)],
+      delete: [Function (anonymous)]
+    },
+    search: [Function (anonymous)],
+    create: [Function (anonymous)],
+    save: [Function (anonymous)],
+    update: [Function (anonymous)],
+    get: [Function (anonymous)],
+    findById: [Function (anonymous)],
+    remove: [Function (anonymous)]
+  },
+  ipn: {
+    available_topics: [
+      'preapproval',
+      'authorized_payment',
+      'payment',
+      'merchant_order'
+    ],
+    getPayment: [Function (anonymous)],
+    getAuthorizedPayment: [Function (anonymous)],
+    manage: [Function (anonymous)],
+    payment: [Function (anonymous)],
+    authorized_payment: [Function (anonymous)],
+    preapproval: [Function (anonymous)],
+    merchant_order: [Function (anonymous)]
+  },
+  connect: {
+    get: [Function (anonymous)],
+    getCredentials: [Function (anonymous)],
+    sendAuthorizationCode: [Function (anonymous)],
+    getCredentialsAndConfigure: [Function (anonymous)]
+  },
+  money_requests: {
+    schema: { additionalProperties: true, properties: [Object] },
+    create: [Function (anonymous)],
+    save: [Function (anonymous)],
+    get: [Function (anonymous)],
+    findById: [Function (anonymous)]
+  },
+  card: {
+    schema: { additionalProperties: true, properties: [Object] },
+    all: [Function (anonymous)],
+    get: [Function (anonymous)],
+    findById: [Function (anonymous)],
+    create: [Function (anonymous)],
+    save: [Function (anonymous)],
+    update: [Function (anonymous)],
+    delete: [Function (anonymous)]
+  },
+  card_token: {
+    schema: { additionalProperties: true, properties: [Object] },
+    get: [Function (anonymous)],
+    findById: [Function (anonymous)],
+    create: [Function (anonymous)],
+    save: [Function (anonymous)]
+  },
+  refund: {
+    schema: { additionalProperties: true, properties: [Object] },
+    idempotency: true,
+    all: [Function (anonymous)],
+    create: [Function (anonymous)],
+    save: [Function (anonymous)]
+  },
+  discount_campaign: {
+    schema: { additionalProperties: true, properties: [Object] },
+    get: [Function (anonymous)]
+  },
+  sandboxMode: [Function: sandboxMode],
+  getAccessToken: [Function: getAccessToken],
+  get: [Function: getRest],
+  post: [Function: postRest],
+  put: [Function: putRest],
+  delete: [Function: deleteRest],
+  createPreference: [Function: createPreference],
+  updatePreference: [Function: updatePreference],
+  getPreference: [Function: getPreference],
+  createPreapprovalPayment: [Function: createPreapprovalPayment],
+  updatePreapprovalPayment: [Function: updatePreapprovalPayment],
+  getPreapprovalPayment: [Function: getPreapprovalPayment],
+  searchPayment: [Function: searchPayment],
+  getPayment: [Function: getPayment],
+  getPaymentInfo: [Function: getPayment],
+  getAuthorizedPayment: [Function: getAuthorizedPayment],
+  refundPayment: [Function: refundPayment],
+  cancelPayment: [Function: cancelPayment],
+  cancelPreapprovalPayment: [Function: cancelPreapprovalPayment],
+  version: '1.5.14'
+}

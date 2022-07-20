@@ -1,7 +1,10 @@
 const Customer = require("../../models/customerSchema");
 
 async function deleteCustomer(req, res) {
+
+  // params
   const customerId = req.params.id;
+
   try {
     const customerDeleted = await Customer.deleteOne({ _id: customerId });
     return res.status(200).json(customerDeleted);

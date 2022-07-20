@@ -1,8 +1,14 @@
+require("dotenv").config();
 const Customer = require("../../models/customerSchema");
+const mercadopago = require("mercadopago");
 
 async function createCustomer(req, res) {
-  console.log("elaiê");
+  // configura mercadopago
+  await mercadopago.configure({
+    access_token: process.env.MERCADO_PAGO_ACCESS_TOKEN,
+  });
 
+  // cria objeto
   const {
     first_name,
     last_name,
@@ -25,7 +31,11 @@ async function createCustomer(req, res) {
     description,
     default_card,
   };
+
   try {
+    // manda o cliente para API mercadopago
+    await mercadopago.customers.create({ customerToPost });
+    // guarda no banco resposta mercadopago
     const customerPosted = await Customer.create(customerToPost);
     return res.status(201).json(customerPosted);
   } catch (error) {
