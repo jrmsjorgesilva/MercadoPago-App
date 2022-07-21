@@ -20,6 +20,7 @@ const createOrder = async (req, res) => {
     ],
     application_id: Number,
   } = req.body;
+
   const orderToPost = {
     external_reference,
     preference_id,
@@ -39,16 +40,16 @@ const createOrder = async (req, res) => {
     ],
     application_id: Number,
   };
+
   try {
     const postedOrder = await Order.create(orderToPost);
     return res.status(201).json(postedOrder);
   } catch (error) {
     return res.status(422).json({
-      message: `The order was not posted on the databse due to na error`,
+      message: `The order was not posted on the database due to an error`,
       error: error.message,
     });
   }
 };
 
 module.exports = createOrder;
-
