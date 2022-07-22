@@ -49,7 +49,7 @@ const CustomersTabs: React.FC = () => {
       index: 4,
     },
   ]);
-  // modal states 
+  // modal states
   const [openDocsOnModal, setOpenDocsOnModal] = useState<boolean>(() => false);
   const [openCustomersCreateForm, setOpenCustomersCreateForm] =
     useState<boolean>(() => false);
@@ -166,6 +166,10 @@ const CustomersTabs: React.FC = () => {
       <CustomersUpdateForm
         hideShowCustormersUpdateForm={hideShowCustormersUpdateForm}
         openCustomersUpdateForm={openCustomersUpdateForm}
+      />
+      <CustomersDeleteForm
+        hideShowCustormersDeleteForm={hideShowCustormersDeleteForm}
+        openCustomersDeleteForm={openCustomersDeleteForm}
       />
       <CustomersDeleteForm
         hideShowCustormersDeleteForm={hideShowCustormersDeleteForm}
