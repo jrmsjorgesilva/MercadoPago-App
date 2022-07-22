@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 // material ui
 // import { useTheme } from "@mui/material/styles";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 // icons
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import BrowserUpdatedIcon from "@mui/icons-material/BrowserUpdated";
 import ScreenSearchDesktopIcon from "@mui/icons-material/ScreenSearchDesktop";
+import Try from "@mui/icons-material/Try";
 // img
 import imgDocs from "../../../assets/svg/documentation.svg";
 import imgCreate from "../../../assets/svg/create.svg";
@@ -20,9 +19,9 @@ import CustomersCreateForm from "./CustomersCreateForm";
 import CustomersReadForm from "./CustomersReadForm";
 import CustomersUpdateForm from "./CustomersUpdateForm";
 import CustomersDeleteForm from "./CustomersDeleteForm";
-import TabPanel from "../../TabPanel";
 import TabContent from "../../TabContent";
 import TabsContainer from "../../TabsContainer";
+import CustomersDocsModal from "./CustomersDocsModal";
 
 const CustomersTabs: React.FC = () => {
   // state hooks
@@ -105,7 +104,7 @@ const CustomersTabs: React.FC = () => {
         tabPanelTitle={"Documentação"}
         tabPanelTextContent={null}
         hideShowModalForm={hideShowDocs}
-        tabPanelIcon={<AddCircleOutlineIcon />}
+        tabPanelIcon={<Try />}
         tabPanelBtnText={"Documentação"}
         tabPanelImg={imgDocs}
         tabPanelAltImg={"tabPanelAltImg"}
@@ -154,7 +153,10 @@ const CustomersTabs: React.FC = () => {
         tabPanelImg={imgDelete}
         tabPanelAltImg={"Deletar clientes imagem"}
       />
-
+      <CustomersDocsModal
+        hideShowDocs={hideShowDocs}
+        openDocsOnModal={openDocsOnModal}
+      />
       <CustomersCreateForm
         hideShowCustormersCreateForm={hideShowCustormersCreateForm}
         openCustomersCreateForm={openCustomersCreateForm}
@@ -166,10 +168,6 @@ const CustomersTabs: React.FC = () => {
       <CustomersUpdateForm
         hideShowCustormersUpdateForm={hideShowCustormersUpdateForm}
         openCustomersUpdateForm={openCustomersUpdateForm}
-      />
-      <CustomersDeleteForm
-        hideShowCustormersDeleteForm={hideShowCustormersDeleteForm}
-        openCustomersDeleteForm={openCustomersDeleteForm}
       />
       <CustomersDeleteForm
         hideShowCustormersDeleteForm={hideShowCustormersDeleteForm}

@@ -4,7 +4,7 @@ import TableBody from "@mui/material/TableBody";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
 // types
-import { StyledTableCell, StyledTableRow } from "../../StyledTables";
+import { StyledTableCell, StyledTableRow } from "../../utils/StyledTables";
 import CustomAlert from "../404/CustomAlert";
 
 

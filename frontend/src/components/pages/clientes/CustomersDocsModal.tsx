@@ -1,5 +1,4 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import ListItemText from "@mui/material/ListItemText";
 import ListItem from "@mui/material/ListItem";
@@ -12,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
+import DocsDetails from "../../DocsDetails";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -22,27 +22,27 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const CustomersDocsModal = () => {
-  const [openDocsModal, setOpenDocsModal] = React.useState(false);
-  const [openDocsDetails, setOpenDocsDetails] = React.useState(false);
+interface CustomersDocsModalType {
+  hideShowDocs?: () => void;
+  openDocsOnModal?: any;
+}
 
-  const handleDocsModal = () => {
-    setOpenDocsModal(!openDocsModal);
-  };
+const CustomersDocsModal: React.FC<CustomersDocsModalType> = ({
+  hideShowDocs,
+  openDocsOnModal,
+}) => {
+  const [openDocsDetails, setOpenDocsDetails] = React.useState(false);
 
   const handleDocsDetails = () => {
     setOpenDocsDetails(!openDocsDetails);
-  }
+  };
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleDocsModal}>
-        Open full-screen dialog
-      </Button>
       <Dialog
         fullScreen
-        open={openDocsModal}
-        onClose={handleDocsModal}
+        open={openDocsOnModal}
+        onClose={hideShowDocs}
         TransitionComponent={Transition}
       >
         <AppBar sx={{ position: "relative" }}>
@@ -53,7 +53,7 @@ const CustomersDocsModal = () => {
             <IconButton
               edge="start"
               color="inherit"
-              onClick={handleDocsModal}
+              onClick={hideShowDocs}
               aria-label="close"
             >
               <CloseIcon />
@@ -62,7 +62,11 @@ const CustomersDocsModal = () => {
         </AppBar>
         <List>
           <ListItem button>
-            <ListItemText primary="Capitulo I" secondary="Sobre a API pasta de clientes" onClick={handleDocsDetails} />
+            <ListItemText
+              primary="Capitulo I"
+              secondary="Sobre a API pasta de clientes"
+              onClick={handleDocsDetails}
+            />
           </ListItem>
           <Divider />
           <ListItem button>
@@ -73,41 +77,12 @@ const CustomersDocsModal = () => {
           </ListItem>
         </List>
       </Dialog>
-      {/* ?DOCS DETAILS */}
-      <Dialog
-        fullScreen
-        open={openDocsDetails}
-        onClose={handleDocsDetails}
-        TransitionComponent={Transition}
-      >
-        <AppBar sx={{ position: "relative" }}>
-          <Toolbar>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              Capitulo 1
-            </Typography>
-            <IconButton
-              edge="start"
-              color="inherit"
-              onClick={handleDocsDetails}
-              aria-label="close"
-            >
-              <CloseIcon />
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-        <List>
-          <ListItem button>
-            <ListItemText primary="Phone ringtone" secondary="Titania" />
-          </ListItem>
-          <Divider />
-          <ListItem button>
-            <ListItemText
-              primary="Default notification ringtone"
-              secondary="Tethys"
-            />
-          </ListItem>
-        </List>
-      </Dialog>
+      <DocsDetails
+        Transition={Transition}
+        handleDocsDetails={handleDocsDetails}
+        openDocsDetails={openDocsDetails}
+        setOpenDocsDetails={setOpenDocsDetails}
+      />
     </div>
   );
 };

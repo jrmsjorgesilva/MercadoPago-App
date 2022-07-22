@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 // material ui
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -26,14 +26,12 @@ const CustomersCreateForm = ({
   // states
   const [identificationType, setIdentificationType] = useState(() => "");
 
-  // refs
-  const formRef = useRef();
-
   // form hooks
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm<customer>({
     resolver: yupResolver(customersSchema),
   });
@@ -55,10 +53,12 @@ const CustomersCreateForm = ({
     }
   };
 
-  const onSubmit = async (formData: customer) => {
+  const onSubmit = (formData: customer) => {
     // fetch
     postCustomers(formData);
-
+    console.log(reset(formData));
+    reset(formData);
+    // formData.map(form => form.value = '');
     // close modal
     hideShowCustormersCreateForm();
   };
@@ -190,7 +190,7 @@ const CustomersCreateForm = ({
           </Button>
           <Button
             variant="contained"
-            type={"submit"}
+            type={"button"}
             onClick={handleSubmit(onSubmit)}
           >
             Enviar
