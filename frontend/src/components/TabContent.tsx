@@ -6,7 +6,19 @@ import TabPanel from "./TabPanel";
 const fallbackText =
   "lorem ipsum is lorem des capas tutum cupi ioretum nade farto cada nasse lorem ipsum is lorem des canapas tutum cupi ioretum nade farto cada nasse lorem ipsum is lorem des canapas tutum cupi ioretum nade farto cada nasse";
 
-const TabContent = ({
+// interface TabContentProps {
+//   tabPanelvalue: number;
+//   tabPanelIndex: number;
+//   tabPanelTitle: string;
+//   tabPanelTextContent: string;
+//   hideShowModalForm: boolean;
+//   tabPanelIcon?: string;
+//   tabPanelBtnText: string;
+//   tabPanelImg: any;
+//   tabPanelAltImg: string;
+// }
+
+const TabContent: React.FC<any> = ({
   tabPanelvalue,
   tabPanelIndex,
   tabPanelTitle,
@@ -16,12 +28,12 @@ const TabContent = ({
   tabPanelBtnText,
   tabPanelImg,
   tabPanelAltImg,
-}: any) => {
+}) => {
   return (
     <TabPanel value={tabPanelvalue} index={tabPanelIndex}>
       <Box sx={{ padding: "20px 0px", display: "flex" }}>
         <Box sx={{}}>
-          <h1>{tabPanelTitle || 'Panel Title'}</h1>
+          <h1>{tabPanelTitle || "Panel Title"}</h1>
           <Typography my={2}>{tabPanelTextContent || fallbackText}</Typography>
           <Button
             style={{ width: "100%" }}

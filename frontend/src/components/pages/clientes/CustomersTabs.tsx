@@ -3,9 +3,7 @@ import React, { useState } from "react";
 // import { useTheme } from "@mui/material/styles";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 // icons
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
@@ -24,33 +22,44 @@ import CustomersUpdateForm from "./CustomersUpdateForm";
 import CustomersDeleteForm from "./CustomersDeleteForm";
 import TabPanel from "../../TabPanel";
 import TabContent from "../../TabContent";
+import TabsContainer from "../../TabsContainer";
 
-// ally props for tabs
-function a11yProps(index: number) {
-  return {
-    id: `full-width-tab-${index}`,
-    "aria-controls": `full-width-tabpanel-${index}`,
-  };
-}
-
-const CustomersTabs = () => {
-  // const theme = useTheme();
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+const CustomersTabs: React.FC = () => {
   // state hooks
-  const [value, setValue] = useState(() => 0);
-  const [openDocsOnModal, setOpenDocsOnModal] = useState(() => false);
-  const [openCustomersCreateForm, setOpenCustomersCreateForm] = useState(
+  const [value, setValue] = useState<number>(() => 0);
+  const [tabsData, setTabsData] = useState<any>(() => [
+    {
+      label: "Documentação",
+      index: 0,
+    },
+    {
+      label: "Criar Clientes",
+      index: 1,
+    },
+    {
+      label: "Buscar Clientes",
+      index: 2,
+    },
+    {
+      label: "Atualizar Clientes",
+      index: 3,
+    },
+    {
+      label: "Deletar Clientes",
+      index: 4,
+    },
+  ]);
+  // modal states 
+  const [openDocsOnModal, setOpenDocsOnModal] = useState<boolean>(() => false);
+  const [openCustomersCreateForm, setOpenCustomersCreateForm] =
+    useState<boolean>(() => false);
+  const [openCustomersReadForm, setOpenCustomersReadForm] = useState<boolean>(
     () => false
   );
-  const [openCustomersReadForm, setOpenCustomersReadForm] = useState(
-    () => false
-  );
-  const [openCustomersUpdateForm, setOpenCustomersUpdateForm] = useState(
-    () => false
-  );
-  const [openCustomersDeleteForm, setOpenCustomersDeleteForm] = useState(
-    () => false
-  );
+  const [openCustomersUpdateForm, setOpenCustomersUpdateForm] =
+    useState<boolean>(() => false);
+  const [openCustomersDeleteForm, setOpenCustomersDeleteForm] =
+    useState<boolean>(() => false);
 
   // forms handlers
   const hideShowDocs = () => {
@@ -73,10 +82,6 @@ const CustomersTabs = () => {
     setOpenCustomersDeleteForm(!openCustomersDeleteForm);
   };
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
-
   // const handleChangeIndex = (index: number) => {
   //   setValue(index);
   // };
@@ -93,44 +98,7 @@ const CustomersTabs = () => {
         borderRadius: 1,
       }}
     >
-      <Tabs
-        orientation="vertical"
-        variant="scrollable"
-        value={value}
-        onChange={handleChange}
-        aria-label="Vertical tabs example"
-        sx={{
-          borderRight: 3,
-          borderColor: "divider",
-          minWidth: "200px",
-        }}
-      >
-        <Tab
-          sx={{ padding: "30px 0px" }}
-          label="Documentação"
-          {...a11yProps(0)}
-        />
-        <Tab
-          sx={{ padding: "30px 0px" }}
-          label="Criar Clientes"
-          {...a11yProps(1)}
-        />
-        <Tab
-          sx={{ padding: "30px 0px" }}
-          label="Buscar Clientes"
-          {...a11yProps(2)}
-        />
-        <Tab
-          sx={{ padding: "30px 0px" }}
-          label="Atualizar Clientes"
-          {...a11yProps(3)}
-        />
-        <Tab
-          sx={{ padding: "30px 0px" }}
-          label="Deletar Clientes"
-          {...a11yProps(4)}
-        />
-      </Tabs>
+      <TabsContainer tabsData={tabsData} value={value} setValue={setValue} />
       <TabContent
         tabPanelvalue={value}
         tabPanelIndex={0}
